@@ -1,0 +1,148 @@
+Python3.8 + Selenium3.9.1
+
+一、环境准备
+1、安装Python3.8
+官网地址：https://www.python.org/
+下载对应版本直接运行安装
+
+2、插件库安装
+    a、安装Selenium3.8.1或3.14.1
+         进入Python安装目录下的Scripts下，执行：pip3 install selenium==3.14.1
+         根据实际使用下载对应版本
+    b、安装pyautoit
+         进入Python安装目录下的Scripts下，执行：pip3 install pyautoit
+    c、FireFox浏览器（Selenium IDE安装）
+         打开FireFox浏览器，输入：https://addons.mozilla.org/en-us/firefox/addon/selenium-ide/
+         点击 Add to Firefox 按钮
+    d、Chrome浏览器（Selenium IDE安装）
+         打开Chrome浏览器，输入：https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd
+         点击添加至Chrome
+
+3、Python开发工具安装
+可以直接使用Python IDLE工具编写脚本。
+如果想写脚本更加便利，可以安装PyCharm工具。
+一般安装Community版本即可。
+PyCharm下载地址：
+https://www.jetbrains.com/pycharm/download/#section=windows
+
+
+4、创建项目
+如果是Professional版本，此处选择Pure Python
+点击打开Project Interpreter，选择Existing interpreter选项
+Interpreter 处点击 ... 后选择对应的版本。
+
+5、新建脚本
+右键点击项目名->New->Python File，输入文件名即可
+
+6、编写脚本
+详见Demo
+Demo使用Professional版本进行演示
+
+7、安装Selenium相关Jar包下载
+下载地址: http://selenium-release.storage.googleapis.com/index.html
+下载对应版本的即可。
+实例版本：selenium-server-standalone-3.9.1.jar
+
+
+8、安装浏览器驱动
+chromedriver.exe（84）
+MicrosoftWebDriver.exe（17）
+geckodriver.exe（0.26）
+msedgedriver.exe（84）
+
+备注：
+如果是使用最新版的Edge，下载的webdriver是msedgedriver.exe（83）
+但Selenium脚本中仍旧只能识别MicrosoftWebDriver.exe。
+所以需要将msedgedriver.exe重命名为MicrosoftWebDriver.exe
+
+如果使用旧版的Edge，并且执行过DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0
+安装新版Edge，如果Selenium操作报未知错误：需要执行DISM.exe /Online /Remove-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0。
+
+9、驱动下载地址：
+旧版驱动及包下载：
+http://selenium-release.storage.googleapis.com/index.html
+包含Selenium-java/Selenium-Server/Selenium-standalone/ID Driver下载
+
+Chrome驱动下载：
+http://chromedriver.storage.googleapis.com/index.html
+需要下载对应的Chrome版本
+
+Firefox驱动下载：
+https://github.com/mozilla/geckodriver/releases/
+需要下载对应的Firefox版本
+
+Edge驱动下载：
+https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+需要下载对应的Edge版本
+
+IE驱动下载：http://selenium-release.storage.googleapis.com/index.html
+需要下载对应的IE版本
+
+AutoIt下载：
+https://www.autoitscript.com/site/autoit/downloads/
+
+
+二、执行
+
+1、启动远端服务
+
+hub和node节点在同一PC(hub使用默认端口)：
+a、java -jar selenium-server-standalone-3.9.1.jar -role hub -maxSession 10
+b、java -jar selenium-server-standalone-3.9.1.jar -role node -maxSession 10 -port 5555
+selenium3 语法规则:  -Dwebdriver.chrome.driver 需要放在最前面
+c、java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.9.1.jar -role node -port 6666 -hub http://localhost:4444/grid/register -maxSession 5 -browser browserName=chrome,seleniumProtocol=WebDriver,maxInstances=5,platform=WINDOWS,version=81.0
+
+a、java -jar selenium-server-standalone-2.53.1.jar -role hub -maxSession 10
+b、java -jar selenium-server-standalone-2.53.1.jar -role node -maxSession 10 -port 6666
+selenium2 语法规则:  -Dwebdriver.chrome.driver 位置无限制
+c、java -jar selenium-server-standalone-2.53.1.jar -role node -port 6666 -hub http://localhost:4444/grid/register -maxSession 5 -browser browserName=chrome,seleniumProtocol=WebDriver,maxInstances=5,platform=WIN10,version=81.0 -Dwebdriver.chrome.driver=chromedriver.exe
+
+hub和node节点在不同PC
+a、java -jar selenium-server-standalone-2.53.1.jar -role hub -maxSession 10
+b、java -jar selenium-server-standalone-2.53.1.jar -role node -maxSession 10 -port 6666 -hub http://hub-IP:4444/grid/register
+
+a、java -jar selenium-server-standalone-3.9.1.jar -role hub -maxSession 10 -port 8888
+b、java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.9.1.jar -role node -port 6666 -hub http://hub-IP:8888/grid/register -maxSession 5 -browser browserName=chrome,seleniumProtocol=WebDriver,maxInstances=5,platform=WIN10,version=81.0
+备注：hub-IP为启动hub服务的服务器IP
+
+2、配置文件方式启动：
+node节点的启动参数可以保存为json文件（如demo.json）：
+{
+  "capabilities": [
+    {
+      "browserName": "chrome",
+      "maxInstances": 10,
+      "platform": "WINDOWS",
+      "version": "83.0",
+      "seleniumProtocol": "WebDriver",
+      "webdriver.chrome.driver": "chromedriver.exe"
+    }
+  ],
+  "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+  "maxSession": 5,
+  "port": 5555,
+  "register": true,
+  "registerCycle": 5000,
+  "hub": "http://192.168.187.1:4444"
+}
+
+执行配置文件demo.json:
+java -jar selenium-server-standalone-3.9.1.jar -role node -hub http://hub-IP:4444/grid/register -nodeConfig demo.json
+与直接使用命令行方式效果相同；注意使用实际IP地址替换hup-IP
+
+
+三、部署
+
+官网地址: https://jenkins.io/download/
+War包下载：http://mirrors.jenkins-ci.org/war/latest/jenkins.war
+MSI安装下载：http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/windows-stable/
+
+安装方式一:
+命运行运行: java -jar jenkins.war　（默认情况下端口是8080）
+命令行运行: java -jar jenkins.war --httpPort=80（使用其他端口启动）
+可以放于批处理中简化操作
+
+安装方式二:
+将下载的war包文件部署到servlet容器(webapps目录)，然后启动容器。
+浏览器的URL地址栏中输入: http://locahost:8080 类似地址
+
