@@ -1,166 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <p>$ java -jar selenium-server-4.1.2.jar router --help</p>
-    <p>Usage: router [options]</p>
-    <p>Options:</p>
-    <p>--allow-cors</p>
-    <p>&emsp;Whether the Selenium server should allow web browser connections from any host</p>
-    <p>&emsp;Default: false</p>
-    <p>--bind-host</p>
-    <p>
-      &emsp;Whether the server should bind to the host address/name, or only use it to report its
-      reachable url. Helpful in complex network topologies where the server cannot report itself
-      with the current IP/hostname but rather an external IP or hostname (e.g. inside a Docker
-      container).
-    </p>
-    <p>&emsp;Default: true</p>
-    <p>--config</p>
-    <p>&emsp;Config file to read from (may be specified more than once)</p>
-    <p>--config-help</p>
-    <p>&emsp;Output detailed information about config options</p>
-    <p>&emsp;Default: false</p>
-    <p>-d, --distributor</p>
-    <p>&emsp;Url of the distributor.</p>
-    <p>--distributor-host</p>
-    <p>&emsp;Host on which the distributor is listening.</p>
-    <p>--distributor-implementation</p>
-    <p>&emsp;Full classname of non-default distributor implementation</p>
-    <p>&emsp;Default: org.openqa.selenium.grid.distributor.local.LocalDistributor</p>
-    <p>--distributor-port</p>
-    <p>&emsp;Port on which the distributor is listening.</p>
-    <p>--grid-model</p>
-    <p>
-      &emsp;Full classname of non-default grid model. This is used to store states of the all the
-      registered Nodes.
-    </p>
-    <p>&emsp;Default: org.openqa.selenium.grid.distributor.GridModel</p>
-    <p>--healthcheck-interval</p>
-    <p>
-      &emsp;How often, in seconds, will the health check run for all Nodes.This ensures the server
-      can ping all the Nodes successfully.
-    </p>
-    <p>&emsp;Default: 120</p>
-    <p>--host</p>
-    <p>&emsp;Server IP or hostname: usually determined automatically.</p>
-    <p>--http-logs</p>
-    <p>&emsp;Enable http logging. Tracing should be enabled to log http logs.</p>
-    <p>&emsp;Default: false</p>
-    <p>--https-certificate</p>
-    <p>
-      &emsp;Server certificate for https. Get more detailed information by running "java -jar
-      selenium-server.jar info security"
-    </p>
-    <p>--https-private-key</p>
-    <p>
-      &emsp;Private key for https. Get more detailed information by running "java -jar
-      selenium-server.jar info security"
-    </p>
-    <p>--log</p>
-    <p>
-      &emsp;File to write out logs. Ensure the file path is compatible with the operating system's
-      file path. Windows path example:
-    </p>
-    <p>
-      &emsp;\\path\to\file\gridlog.log OR C:\path\path\to\file\gridlog.log Linux/Unix/MacOS path
-      example: /path/to/file/gridlog.log
-    </p>
-    <p>--log-encoding</p>
-    <p>&emsp;Log encoding</p>
-    <p>--log-level</p>
-    <p>
-      &emsp;Log level. Default logging level is INFO. Log levels are described here
-      https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html
-    </p>
-    <p>&emsp;Default: INFO</p>
-    <p>--log-timestamp-format</p>
-    <p>&emsp;Format of the timestamp in log output</p>
-    <p>--max-threads</p>
-    <p>&emsp;Maximum number of listener threads. Default value is: (available processors) * 3.</p>
-    <p>&emsp;Default: 12</p>
-    <p>--password</p>
-    <p>
-      &emsp;Password clients must use to connect to the server. Both this and the username need to
-      be set in order to be used.
-    </p>
-    <p>--plain-logs</p>
-    <p>&emsp;Use plain log lines</p>
-    <p>&emsp;Default: true</p>
-    <p>-p, --port</p>
-    <p>
-      &emsp;Port to listen on. There is no default as this parameter is used by different
-      components, for example Router/Hub/Standalone will use 4444 and Node will use 5555.
-    </p>
-    <p>--registration-secret</p>
-    <p>&emsp;Node registration secret</p>
-    <p>--reject-unsupported-caps</p>
-    <p>
-      &emsp;Allow the Distributor to reject a request immediately if the Grid does not support the
-      requested capability.Rejecting requests immediately is suitable for Grid set up that does not
-      spin up Nodes on demand.
-    </p>
-    <p>&emsp;Default: false</p>
-    <p>--relax-checks</p>
-    <p>
-      &emsp;Relax checks on origin header and content type of incoming requests, in contravention of
-      strict W3C spec compliance.
-    </p>
-    <p>&emsp;Default: false</p>
-    <p>--session-request-timeout</p>
-    <p>
-      &emsp;Timeout in seconds. New incoming session request is added to the queue. Requests sitting
-      in the queue for longer than the configured time will timeout.
-    </p>
-    <p>&emsp;Default: 300</p>
-    <p>--session-retry-interval</p>
-    <p>
-      &emsp;Retry interval in seconds. If all slots are busy, new session request will be retried
-      after the given interval.
-    </p>
-    <p>&emsp;Default: 0</p>
-    <p>--sq, --sessionqueue</p>
-    <p>&emsp;Address of the session queue server.</p>
-    <p>--sessionqueue-host</p>
-    <p>&emsp;Host on which the session queue server is listening.</p>
-    <p>--sessionqueue-port</p>
-    <p>&emsp;Port on which the session queue server is listening.</p>
-    <p>-s, --sessions</p>
-    <p>&emsp;Address of the session map server.</p>
-    <p>--sessions-host</p>
-    <p>&emsp;Host on which the session map server is listening.</p>
-    <p>--sessions-port</p>
-    <p>&emsp;Port on which the session map server is listening.</p>
-    <p>--slot-matcher</p>
-    <p>
-      &emsp;Full classname of non-default slot matcher to use. This is used to determine whether a
-      Node can support a particular session.
-    </p>
-    <p>&emsp;Default: org.openqa.selenium.grid.data.DefaultSlotMatcher</p>
-    <p>--slot-selector</p>
-    <p>
-      &emsp;Full classname of non-default slot selector. This is used to select a slot in a Node
-      once the Node has been matched.
-    </p>
-    <p>&emsp;Default: org.openqa.selenium.grid.distributor.selector.DefaultSlotSelector</p>
-    <p>--structured-logs</p>
-    <p>&emsp;Use structured logs</p>
-    <p>&emsp;Default: false</p>
-    <p>--tracing</p>
-    <p>&emsp;Enable trace collection</p>
-    <p>&emsp;Default: true</p>
-    <p>--username</p>
-    <p>
-      &emsp;User name clients must use to connect to the server. Both this and password need to be
-      set in order to be used.
-    </p>
-    <p>--version</p>
-    <p>&emsp;Displays the version and exits.</p>
-    <p>&emsp;Default: false</p>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HelpRouter</title>
+	</head>
+	<body>
+		<p>$ java -jar selenium-server-4.1.2.jar router --help</p>
+		<p>Usage: router [options]</p>
+		<p>Options:</p>
+		<p>--allow-cors</p>
+		<p>&emsp;Whether the Selenium server should allow web browser connections from any host</p>
+		<p>&emsp;Default: false</p>
+		<p>--bind-host</p>
+		<p>
+			&emsp;Whether the server should bind to the host address/name, or only use it to report its
+			reachable url. Helpful in complex network topologies where the server cannot report itself
+			with the current IP/hostname but rather an external IP or hostname (e.g. inside a Docker
+			container).
+		</p>
+		<p>&emsp;Default: true</p>
+		<p>--config</p>
+		<p>&emsp;Config file to read from (may be specified more than once)</p>
+		<p>--config-help</p>
+		<p>&emsp;Output detailed information about config options</p>
+		<p>&emsp;Default: false</p>
+		<p>-d, --distributor</p>
+		<p>&emsp;Url of the distributor.</p>
+		<p>--distributor-host</p>
+		<p>&emsp;Host on which the distributor is listening.</p>
+		<p>--distributor-implementation</p>
+		<p>&emsp;Full classname of non-default distributor implementation</p>
+		<p>&emsp;Default: org.openqa.selenium.grid.distributor.local.LocalDistributor</p>
+		<p>--distributor-port</p>
+		<p>&emsp;Port on which the distributor is listening.</p>
+		<p>--grid-model</p>
+		<p>
+			&emsp;Full classname of non-default grid model. This is used to store states of the all the
+			registered Nodes.
+		</p>
+		<p>&emsp;Default: org.openqa.selenium.grid.distributor.GridModel</p>
+		<p>--healthcheck-interval</p>
+		<p>
+			&emsp;How often, in seconds, will the health check run for all Nodes.This ensures the server
+			can ping all the Nodes successfully.
+		</p>
+		<p>&emsp;Default: 120</p>
+		<p>--host</p>
+		<p>&emsp;Server IP or hostname: usually determined automatically.</p>
+		<p>--http-logs</p>
+		<p>&emsp;Enable http logging. Tracing should be enabled to log http logs.</p>
+		<p>&emsp;Default: false</p>
+		<p>--https-certificate</p>
+		<p>
+			&emsp;Server certificate for https. Get more detailed information by running "java -jar
+			selenium-server.jar info security"
+		</p>
+		<p>--https-private-key</p>
+		<p>
+			&emsp;Private key for https. Get more detailed information by running "java -jar
+			selenium-server.jar info security"
+		</p>
+		<p>--log</p>
+		<p>
+			&emsp;File to write out logs. Ensure the file path is compatible with the operating system's
+			file path. Windows path example:
+		</p>
+		<p>
+			&emsp;\\path\to\file\gridlog.log OR C:\path\path\to\file\gridlog.log Linux/Unix/MacOS path
+			example: /path/to/file/gridlog.log
+		</p>
+		<p>--log-encoding</p>
+		<p>&emsp;Log encoding</p>
+		<p>--log-level</p>
+		<p>
+			&emsp;Log level. Default logging level is INFO. Log levels are described here
+			https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html
+		</p>
+		<p>&emsp;Default: INFO</p>
+		<p>--log-timestamp-format</p>
+		<p>&emsp;Format of the timestamp in log output</p>
+		<p>--max-threads</p>
+		<p>&emsp;Maximum number of listener threads. Default value is: (available processors) * 3.</p>
+		<p>&emsp;Default: 12</p>
+		<p>--password</p>
+		<p>
+			&emsp;Password clients must use to connect to the server. Both this and the username need to
+			be set in order to be used.
+		</p>
+		<p>--plain-logs</p>
+		<p>&emsp;Use plain log lines</p>
+		<p>&emsp;Default: true</p>
+		<p>-p, --port</p>
+		<p>
+			&emsp;Port to listen on. There is no default as this parameter is used by different
+			components, for example Router/Hub/Standalone will use 4444 and Node will use 5555.
+		</p>
+		<p>--registration-secret</p>
+		<p>&emsp;Node registration secret</p>
+		<p>--reject-unsupported-caps</p>
+		<p>
+			&emsp;Allow the Distributor to reject a request immediately if the Grid does not support the
+			requested capability.Rejecting requests immediately is suitable for Grid set up that does not
+			spin up Nodes on demand.
+		</p>
+		<p>&emsp;Default: false</p>
+		<p>--relax-checks</p>
+		<p>
+			&emsp;Relax checks on origin header and content type of incoming requests, in contravention of
+			strict W3C spec compliance.
+		</p>
+		<p>&emsp;Default: false</p>
+		<p>--session-request-timeout</p>
+		<p>
+			&emsp;Timeout in seconds. New incoming session request is added to the queue. Requests sitting
+			in the queue for longer than the configured time will timeout.
+		</p>
+		<p>&emsp;Default: 300</p>
+		<p>--session-retry-interval</p>
+		<p>
+			&emsp;Retry interval in seconds. If all slots are busy, new session request will be retried
+			after the given interval.
+		</p>
+		<p>&emsp;Default: 0</p>
+		<p>--sq, --sessionqueue</p>
+		<p>&emsp;Address of the session queue server.</p>
+		<p>--sessionqueue-host</p>
+		<p>&emsp;Host on which the session queue server is listening.</p>
+		<p>--sessionqueue-port</p>
+		<p>&emsp;Port on which the session queue server is listening.</p>
+		<p>-s, --sessions</p>
+		<p>&emsp;Address of the session map server.</p>
+		<p>--sessions-host</p>
+		<p>&emsp;Host on which the session map server is listening.</p>
+		<p>--sessions-port</p>
+		<p>&emsp;Port on which the session map server is listening.</p>
+		<p>--slot-matcher</p>
+		<p>
+			&emsp;Full classname of non-default slot matcher to use. This is used to determine whether a
+			Node can support a particular session.
+		</p>
+		<p>&emsp;Default: org.openqa.selenium.grid.data.DefaultSlotMatcher</p>
+		<p>--slot-selector</p>
+		<p>
+			&emsp;Full classname of non-default slot selector. This is used to select a slot in a Node
+			once the Node has been matched.
+		</p>
+		<p>&emsp;Default: org.openqa.selenium.grid.distributor.selector.DefaultSlotSelector</p>
+		<p>--structured-logs</p>
+		<p>&emsp;Use structured logs</p>
+		<p>&emsp;Default: false</p>
+		<p>--tracing</p>
+		<p>&emsp;Enable trace collection</p>
+		<p>&emsp;Default: true</p>
+		<p>--username</p>
+		<p>
+			&emsp;User name clients must use to connect to the server. Both this and password need to be
+			set in order to be used.
+		</p>
+		<p>--version</p>
+		<p>&emsp;Displays the version and exits.</p>
+		<p>&emsp;Default: false</p>
+	</body>
 </html>
